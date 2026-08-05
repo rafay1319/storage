@@ -1,0 +1,373 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  OWNER_ADMIN
+  FACILITY_MANAGER
+  EMPLOYEE
+  CUSTOMER
+}
+
+enum ContainerSize {
+  SIZE_20FT
+  SIZE_40FT
+  SIZE_45FT
+  CUSTOM
+}
+
+enum ContainerType {
+  STORAGE
+  CLIMATE_CONTROLLED
+  HAZARDOUS
+  OPEN_TOP
+  REFRIGERATED
+}
+
+enum ContainerStatus {
+  AVAILABLE
+  OCCUPIED
+  RESERVED
+  MAINTENANCE
+  CLEANING
+  OUT_OF_SERVICE
+}
+
+enum BillingCycle {
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+  CUSTOM
+}
+
+enum RentalStatus {
+  ACTIVE
+  PENDING
+  EXPIRED
+  TERMINATED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  BANK_TRANSFER
+  ONLINE
+}
+
+enum PaymentStatus {
+  PAID
+  PENDING
+  FAILED
+  REFUNDED
+}
+
+enum InvoiceStatus {
+  PAID
+  PENDING
+  OVERDUE
+  CANCELLED
+}
+
+enum ExpenseCategory {
+  SALARY
+  UTILITY
+  TAX
+  INSURANCE
+  REPAIR
+  OPERATIONAL
+  MARKETING
+}
+
+enum TaskType {
+  INSPECTION
+  CLEANING
+  PAINTING
+  REPAIR
+  MOVE_CONTAINER
+  CUSTOMER_VISIT
+  INVENTORY_CHECK
+  EMERGENCY_REPAIR
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  EMERGENCY
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  REVIEW
+  COMPLETED
+}
+
+model User {
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         Role      @default(EMPLOYEE)
+  phone        String?
+  avatar       String?
+  facilityId   String?
+  facility     Facility? @relation("FacilityEmployees", fields: [facilityId], references: [id], onDelete: SetNull)
+  status       String    @default("ACTIVE")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  managedFacilities Facility[]       @relation("FacilityManager")
+  assignedTasks     Task[]           @relation("AssignedTasks")
+  createdTasks      Task[]           @relation("CreatedTasks")
+  submittedReports  TaskReport[]
+  auditLogs         AuditLog[]
+  notifications     Notification[]
+}
+
+model Facility {
+  id             String      @id @default(uuid())
+  code           String      @unique
+  name           String
+  address        String
+  gpsLat         Float?
+  gpsLng         Float?
+  city           String
+  state          String
+  country        String      @default("USA")
+  managerId      String?
+  manager        User?       @relation("FacilityManager", fields: [managerId], references: [id], onDelete: SetNull)
+  contactNumber  String
+  operatingHours String      @default("08:00 AM - 08:00 PM")
+  notes          String?
+  gridRows       Int         @default(10)
+  gridCols       Int         @default(12)
+  photos         String[]    @default([])
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  employees      User[]      @relation("FacilityEmployees")
+  containers     Container[]
+  rentals        RentalAgreement[]
+  expenses       Expense[]
+  tasks          Task[]
+  photosVault    PhotoRecord[]
+}
+
+model Container {
+  id               String          @id @default(uuid())
+  containerNumber  String          @unique
+  facilityId       String
+  facility         Facility        @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  size             ContainerSize   @default(SIZE_20FT)
+  type             ContainerType   @default(STORAGE)
+  status           ContainerStatus @default(AVAILABLE)
+  rentalPrice      Float
+  purchaseCost     Float           @default(5000)
+  currentValue     Float           @default(4500)
+  insuranceValue   Float           @default(6000)
+  posX             Int             @default(0)
+  posY             Int             @default(0)
+  qrCode           String?
+  barcode          String?
+  lastInspectedAt  DateTime?
+  nextInspectionAt DateTime?
+  photos           String[]        @default([])
+  documents        String[]        @default([])
+  notes            String?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  rentals          RentalAgreement[]
+  tasks            Task[]
+  photoVault       PhotoRecord[]
+}
+
+model Customer {
+  id                 String   @id @default(uuid())
+  name               String
+  companyName        String?
+  email              String   @unique
+  phone              String
+  govId              String?
+  address            String?
+  emergencyContact   String?
+  outstandingBalance Float    @default(0.0)
+  documents          String[] @default([])
+  notes              String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  rentals            RentalAgreement[]
+  invoices           Invoice[]
+  payments           Payment[]
+  photosVault        PhotoRecord[]
+}
+
+model RentalAgreement {
+  id                   String       @id @default(uuid())
+  rentalNumber         String       @unique
+  customerId           String
+  customer             Customer     @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  containerId          String
+  container            Container    @relation(fields: [containerId], references: [id], onDelete: Cascade)
+  facilityId           String
+  facility             Facility     @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  startDate            DateTime
+  endDate              DateTime?
+  billingCycle         BillingCycle @default(MONTHLY)
+  rentRate             Float
+  depositAmount        Float        @default(0.0)
+  lateFeeRate          Float        @default(25.0)
+  autoRenew            Boolean      @default(true)
+  status               RentalStatus @default(ACTIVE)
+  digitalSignatureUrl  String?
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+
+  invoices             Invoice[]
+  payments             Payment[]
+}
+
+model Invoice {
+  id            String        @id @default(uuid())
+  invoiceNumber String        @unique
+  customerId    String
+  customer      Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  rentalId      String?
+  rental        RentalAgreement? @relation(fields: [rentalId], references: [id], onDelete: SetNull)
+  subtotal      Float
+  tax           Float         @default(0.0)
+  lateFee       Float         @default(0.0)
+  total         Float
+  status        InvoiceStatus @default(PENDING)
+  issuedDate    DateTime      @default(now())
+  dueDate       DateTime
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  payments      Payment[]
+}
+
+model Payment {
+  id             String        @id @default(uuid())
+  receiptNumber  String        @unique
+  invoiceId      String?
+  invoice        Invoice?      @relation(fields: [invoiceId], references: [id], onDelete: SetNull)
+  rentalId       String?
+  rental         RentalAgreement? @relation(fields: [rentalId], references: [id], onDelete: SetNull)
+  customerId     String
+  customer       Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  amount         Float
+  method         PaymentMethod @default(ONLINE)
+  status         PaymentStatus @default(PAID)
+  paymentDate    DateTime      @default(now())
+  transactionRef String?
+  notes          String?
+  createdAt      DateTime      @default(now())
+}
+
+model Expense {
+  id              String          @id @default(uuid())
+  facilityId      String
+  facility        Facility        @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  category        ExpenseCategory @default(OPERATIONAL)
+  amount          Float
+  description     String
+  expenseDate     DateTime        @default(now())
+  receiptPhotoUrl String?
+  createdAt       DateTime        @default(now())
+}
+
+model Task {
+  id             String      @id @default(uuid())
+  taskNumber     String      @unique
+  facilityId     String
+  facility       Facility    @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  containerId    String?
+  container      Container?  @relation(fields: [containerId], references: [id], onDelete: SetNull)
+  assignedToId   String?
+  assignedTo     User?       @relation("AssignedTasks", fields: [assignedToId], references: [id], onDelete: SetNull)
+  createdById    String?
+  createdBy      User?       @relation("CreatedTasks", fields: [createdById], references: [id], onDelete: SetNull)
+  type           TaskType    @default(INSPECTION)
+  priority       Priority    @default(MEDIUM)
+  status         TaskStatus  @default(PENDING)
+  title          String
+  description    String?
+  dueDate        DateTime?
+  estimatedHours Float?
+  checklist      Json?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  reports        TaskReport[]
+  photosVault    PhotoRecord[]
+}
+
+model TaskReport {
+  id                    String   @id @default(uuid())
+  taskId                String
+  task                  Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  submittedById         String
+  submittedBy           User     @relation(fields: [submittedById], references: [id], onDelete: Cascade)
+  notes                 String
+  completionTimeMinutes Int?
+  beforePhotos          String[] @default([])
+  duringPhotos          String[] @default([])
+  afterPhotos           String[] @default([])
+  voiceNoteUrl          String?
+  videoUrl              String?
+  gpsLat                Float?
+  gpsLng                Float?
+  digitalSignatureUrl   String?
+  materialsUsed         Json?
+  extraCosts            Float    @default(0.0)
+  createdAt             DateTime @default(now())
+}
+
+model PhotoRecord {
+  id          String    @id @default(uuid())
+  url         String
+  title       String?
+  category    String    @default("GENERAL")
+  facilityId  String?
+  facility    Facility? @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  containerId String?
+  container   Container?@relation(fields: [containerId], references: [id], onDelete: Cascade)
+  customerId  String?
+  customer    Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  taskId      String?
+  task        Task?     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  uploadedBy  String?
+  createdAt   DateTime  @default(now())
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   @default("INFO")
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String
+  entity    String
+  entityId  String?
+  details   String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+}
