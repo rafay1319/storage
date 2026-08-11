@@ -1,8 +1,5 @@
-'use client';
-
 import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Warehouse, 
@@ -14,7 +11,8 @@ import {
   DollarSign, 
   Sparkles, 
   Settings,
-  ShieldCheck
+  ShieldCheck,
+  Activity
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -23,10 +21,12 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ currentRole, onRoleChange }) => {
-  const pathname = usePathname();
+  const location = useLocation();
+  const pathname = location.pathname;
 
   const navItems = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+    { name: 'Live Feed', href: '/feed', icon: Activity },
     { name: 'Facilities', href: '/facilities', icon: Warehouse },
     { name: 'Visual Yard Map', href: '/map', icon: Map },
     { name: 'Containers', href: '/containers', icon: Box },
@@ -75,7 +75,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentRole, onRoleChange }) =
           return (
             <Link
               key={item.href}
-              href={item.href}
+              to={item.href}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-xs transition-all duration-150 ${
                 isActive
                   ? 'bg-blue-600/15 text-blue-400 border-l-4 border-blue-500 font-semibold shadow-sm'
@@ -84,6 +84,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentRole, onRoleChange }) =
             >
               <Icon className={`w-4 h-4 ${isActive ? 'text-blue-400' : 'text-slate-500'}`} />
               <span>{item.name}</span>
+              {item.name === 'Live Feed' && (
+                <span className="ml-auto flex items-center gap-1 text-[9px] font-extrabold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded-full">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                  LIVE
+                </span>
+              )}
               {item.name === 'AI Intelligence' && (
                 <span className="ml-auto text-[10px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-1.5 py-0.5 rounded-full animate-pulse">
                   AI

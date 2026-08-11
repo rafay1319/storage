@@ -143,3 +143,26 @@ export interface AIInsight {
   impact: 'HIGH' | 'MEDIUM' | 'LOW';
   recommendedAction: string;
 }
+
+export type FeedCategory = 'GATE_MOVE' | 'RENTAL_PAYMENT' | 'INSPECTION' | 'AI_ALERT' | 'MAINTENANCE';
+export type FeedSeverity = 'info' | 'success' | 'warning' | 'danger';
+
+export interface FeedItem {
+  id: string;
+  timestamp: string;
+  category: FeedCategory;
+  title: string;
+  description: string;
+  facilityId?: string;
+  facilityName?: string;
+  containerNumber?: string;
+  customerName?: string;
+  actorName: string;
+  actorRole: string;
+  actorAvatar?: string;
+  severity: FeedSeverity;
+  actionable?: boolean;
+  actionLabel?: string;
+  metadata?: Record<string, string | number | boolean>;
+}
+

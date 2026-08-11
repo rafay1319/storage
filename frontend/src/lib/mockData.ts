@@ -1,4 +1,5 @@
-import { Facility, Container, Customer, RentalAgreement, Task, AIInsight } from './types';
+import { Facility, Container, Customer, RentalAgreement, Task, AIInsight, FeedItem } from './types';
+
 
 export const INITIAL_FACILITIES: Facility[] = [
   {
@@ -159,3 +160,119 @@ export const INITIAL_AI_INSIGHTS: AIInsight[] = [
   { id: 'ai-2', type: 'OPPORTUNITY', title: 'Optimal Yield Adjustment: Long Beach Harbor Storage', facilityName: 'Long Beach Harbor Storage', description: 'Yard is operating at 90.0% capacity. Market rate analysis shows strong rate premium elasticity.', metric: '+$85/mo pricing power', impact: 'HIGH', recommendedAction: 'Increase monthly rental rate for new refrigerated container leases by 12%.' },
   { id: 'ai-3', type: 'MAINTENANCE', title: 'Preventative Inspection Cycle Triggered', facilityName: 'Austin Port Terminal Yard', description: '4 containers have exceeded 180 days since last certified structural inspection.', metric: '4 Pending Inspections', impact: 'MEDIUM', recommendedAction: 'Assign Carlos Ramirez to complete field inspection checklist on ATX-2004, ATX-2014, and ATX-2008.' }
 ];
+
+export const INITIAL_FEED_ITEMS: FeedItem[] = [
+  {
+    id: 'feed-001',
+    timestamp: '2 mins ago',
+    category: 'GATE_MOVE',
+    title: 'Container Inbound Gate Check-In',
+    description: 'Heavy duty flatbed tractor unit checked in container ATX-2024 at Gate 2. Position assigned: Row 7, Stacking Bay 2.',
+    facilityId: 'fac-001',
+    facilityName: 'Austin Port Terminal Yard',
+    containerNumber: 'ATX-2024',
+    customerName: 'Apex Global Logistics',
+    actorName: 'Jason Miller',
+    actorRole: 'Yard Facility Manager',
+    severity: 'info',
+    actionable: true,
+    actionLabel: 'View Gate Ticket',
+    metadata: { gateNumber: 'Gate 2', driverName: 'Marcus Vance', grossWeightKg: 18400 }
+  },
+  {
+    id: 'feed-002',
+    timestamp: '14 mins ago',
+    category: 'AI_ALERT',
+    title: 'Reefer Unit Temperature Anomaly Detected',
+    description: 'AI IoT Telemetry flagged temperature variation (+3.8°C above target) for Refrigerated Container LBH-1002.',
+    facilityId: 'fac-002',
+    facilityName: 'Long Beach Harbor Storage',
+    containerNumber: 'LBH-1002',
+    actorName: 'CY AI Engine',
+    actorRole: 'Automated System Sentinel',
+    severity: 'danger',
+    actionable: true,
+    actionLabel: 'Dispatch Emergency Tech',
+    metadata: { targetTempC: -18, actualTempC: -14.2, compressorPressureBar: 12.4 }
+  },
+  {
+    id: 'feed-003',
+    timestamp: '32 mins ago',
+    category: 'RENTAL_PAYMENT',
+    title: 'Automated Lease Renewal Payment Received',
+    description: 'Stripe ACH payment of $1,850.00 processed successfully for monthly rental agreement #RNT-2026-089.',
+    facilityId: 'fac-002',
+    facilityName: 'Long Beach Harbor Storage',
+    containerNumber: 'LBH-1005',
+    customerName: 'Pacific Rim Freight',
+    actorName: 'System Billing Bot',
+    actorRole: 'Financial Automation',
+    severity: 'success',
+    actionable: false,
+    metadata: { amount: 1850, invoiceId: 'INV-88392', cycle: 'Monthly' }
+  },
+  {
+    id: 'feed-004',
+    timestamp: '1 hour ago',
+    category: 'INSPECTION',
+    title: 'Mobile Inspection Report Uploaded',
+    description: 'Carlos Ramirez submitted digital inspection report #TSK-10492 for container ATX-2004. Door gasket repaired and sealed.',
+    facilityId: 'fac-001',
+    facilityName: 'Austin Port Terminal Yard',
+    containerNumber: 'ATX-2004',
+    actorName: 'Carlos Ramirez',
+    actorRole: 'Field Service Tech',
+    severity: 'info',
+    actionable: true,
+    actionLabel: 'Inspect Report & Photos',
+    metadata: { photosUploaded: 3, passScorePercent: 98, repairCost: 85 }
+  },
+  {
+    id: 'feed-005',
+    timestamp: '2 hours ago',
+    category: 'MAINTENANCE',
+    title: 'Forklift Hydraulic Servicing Scheduled',
+    description: 'Scheduled preventative maintenance for 45-Ton Heavy Stacker #FL-04 at Miami Inland Container Depot.',
+    facilityId: 'fac-004',
+    facilityName: 'Miami Inland Container Depot',
+    actorName: 'Elena Rostova',
+    actorRole: 'Yard Operations Lead',
+    severity: 'warning',
+    actionable: true,
+    actionLabel: 'View Schedule',
+    metadata: { equipmentId: 'FL-04', downtimeEstHours: 4 }
+  },
+  {
+    id: 'feed-006',
+    timestamp: '3 hours ago',
+    category: 'RENTAL_PAYMENT',
+    title: 'New Customer Lease Contract Signed',
+    description: 'Digital signature verified for 20ft Storage Unit ATX-2002. Customer: Boulder Construction LLC.',
+    facilityId: 'fac-001',
+    facilityName: 'Austin Port Terminal Yard',
+    containerNumber: 'ATX-2002',
+    customerName: 'Boulder Construction LLC',
+    actorName: 'David Miller',
+    actorRole: 'Customer Representative',
+    severity: 'success',
+    actionable: true,
+    actionLabel: 'View Contract',
+    metadata: { depositPaid: 450, rateMonthly: 450, termMonths: 6 }
+  },
+  {
+    id: 'feed-007',
+    timestamp: '5 hours ago',
+    category: 'AI_ALERT',
+    title: 'Yard Capacity Utilization Below Target',
+    description: 'Houston Freight Logistics Yard fell below 50% occupancy threshold (currently 44%). AI suggests pricing discount.',
+    facilityId: 'fac-003',
+    facilityName: 'Houston Freight Logistics Yard',
+    actorName: 'CY AI Engine',
+    actorRole: 'Revenue Optimization AI',
+    severity: 'warning',
+    actionable: true,
+    actionLabel: 'Review AI Strategy',
+    metadata: { currentRatePercent: 44, targetPercent: 75 }
+  }
+];
+
