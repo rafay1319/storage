@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Header } from '@/components/layout/Header';
@@ -7,9 +5,9 @@ import { CommandPalette } from '@/components/layout/CommandPalette';
 import { FinancialCharts } from '@/components/analytics/FinancialCharts';
 import { FacilityComparison } from '@/components/analytics/FacilityComparison';
 import { INITIAL_FACILITIES, INITIAL_CONTAINERS, INITIAL_CUSTOMERS, INITIAL_TASKS } from '@/lib/mockData';
-import { DollarSign, Download, Plus, TrendingUp, FileSpreadsheet, CheckCircle2 } from 'lucide-react';
+import { DollarSign, Download, Plus } from 'lucide-react';
 
-export default function FinancePage() {
+export function FinancePage() {
   const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
   const [selectedFacilityId, setSelectedFacilityId] = useState('ALL');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);

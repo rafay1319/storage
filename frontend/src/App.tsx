@@ -1,34 +1,33 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { DashboardPage } from '@/pages/DashboardPage';
+import { FacilitiesPage } from '@/pages/FacilitiesPage';
+import { MapPage } from '@/pages/MapPage';
+import { ContainersPage } from '@/pages/ContainersPage';
+import { CustomersPage } from '@/pages/CustomersPage';
+import { RentalsPage } from '@/pages/RentalsPage';
+import { TasksPage } from '@/pages/TasksPage';
+import { FinancePage } from '@/pages/FinancePage';
+import { AiInsightsPage } from '@/pages/AiInsightsPage';
+import { SettingsPage } from '@/pages/SettingsPage';
 
-import ExecutiveDashboard from '@/app/page';
-import LiveFeedPage from '@/app/feed/page';
-import FacilitiesPage from '@/app/facilities/page';
-import VisualYardMapPage from '@/app/map/page';
-import ContainersPage from '@/app/containers/page';
-import CustomersPage from '@/app/customers/page';
-import RentalsPage from '@/app/rentals/page';
-import TasksPage from '@/app/tasks/page';
-import FinancePage from '@/app/finance/page';
-import AIInsightsPage from '@/app/ai-insights/page';
-import SettingsPage from '@/app/settings/page';
-
-export default function App() {
+export function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ExecutiveDashboard />} />
-        <Route path="/feed" element={<LiveFeedPage />} />
+        <Route path="/" element={<DashboardPage />} />
         <Route path="/facilities" element={<FacilitiesPage />} />
-        <Route path="/map" element={<VisualYardMapPage />} />
+        <Route path="/map" element={<MapPage />} />
         <Route path="/containers" element={<ContainersPage />} />
         <Route path="/customers" element={<CustomersPage />} />
         <Route path="/rentals" element={<RentalsPage />} />
         <Route path="/tasks" element={<TasksPage />} />
         <Route path="/finance" element={<FinancePage />} />
-        <Route path="/ai-insights" element={<AIInsightsPage />} />
+        <Route path="/ai-insights" element={<AiInsightsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
       </Routes>
     </BrowserRouter>
   );
 }
+
+export default App;

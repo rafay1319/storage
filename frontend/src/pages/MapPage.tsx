@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Header } from '@/components/layout/Header';
@@ -9,7 +7,7 @@ import { ContainerDetailModal } from '@/components/map/ContainerDetailModal';
 import { INITIAL_FACILITIES, INITIAL_CONTAINERS, INITIAL_CUSTOMERS, INITIAL_TASKS } from '@/lib/mockData';
 import { Container } from '@/lib/types';
 
-export default function VisualYardMapPage() {
+export function MapPage() {
   const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
   const [selectedFacilityId, setSelectedFacilityId] = useState('fac-001');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);

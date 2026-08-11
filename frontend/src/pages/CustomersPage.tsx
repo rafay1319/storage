@@ -1,13 +1,11 @@
-'use client';
-
 import React, { useState } from 'react';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Header } from '@/components/layout/Header';
 import { CommandPalette } from '@/components/layout/CommandPalette';
 import { INITIAL_FACILITIES, INITIAL_CONTAINERS, INITIAL_CUSTOMERS, INITIAL_TASKS } from '@/lib/mockData';
-import { Users, Plus, Mail, Phone, MapPin, ShieldCheck, FileText } from 'lucide-react';
+import { Users, Plus, Mail, Phone, MapPin, FileText } from 'lucide-react';
 
-export default function CustomersPage() {
+export function CustomersPage() {
   const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
   const [selectedFacilityId, setSelectedFacilityId] = useState('ALL');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);

@@ -1,18 +1,16 @@
-'use client';
-
 import React, { useState } from 'react';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Header } from '@/components/layout/Header';
 import { CommandPalette } from '@/components/layout/CommandPalette';
 import { FacilityComparison } from '@/components/analytics/FacilityComparison';
 import { INITIAL_FACILITIES, INITIAL_CONTAINERS, INITIAL_CUSTOMERS, INITIAL_TASKS } from '@/lib/mockData';
-import { Warehouse, Plus, MapPin, Phone, Clock, ArrowRightLeft, ShieldCheck } from 'lucide-react';
+import { Warehouse, Plus, MapPin, Phone, Clock, ArrowRightLeft } from 'lucide-react';
 
-export default function FacilitiesPage() {
+export function FacilitiesPage() {
   const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
   const [selectedFacilityId, setSelectedFacilityId] = useState('ALL');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
-  const [showTransferModal, setShowTransferModal] = useState(false);
+  const [_showTransferModal, setShowTransferModal] = useState(false);
 
   return (
     <div className="flex min-h-screen bg-slate-950 text-slate-100 font-sans">
