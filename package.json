@@ -5,34 +5,17 @@
   "type": "module",
   "description": "Storage Facility Management SaaS Platform Root Runner",
   "scripts": {
-    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"blue,green\" \"npm --prefix backend run dev\" \"vite\"",
-    "dev:frontend": "vite",
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"blue,green\" \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "dev:frontend": "npm --prefix frontend run dev",
     "dev:backend": "npm --prefix backend run dev",
-    "build": "npm --prefix backend run build && tsc && vite build",
-    "preview": "vite preview",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview",
     "install:backend": "npm --prefix backend install",
-    "postinstall": "npm --prefix backend install"
-  },
-  "dependencies": {
-    "clsx": "^2.1.0",
-    "lucide-react": "^0.475.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.1.5",
-    "recharts": "^2.12.2",
-    "tailwind-merge": "^2.2.1"
+    "install:frontend": "npm --prefix frontend install",
+    "postinstall": "npm --prefix backend install && npm --prefix frontend install"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@tailwindcss/vite": "^4.3.3",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^4.3.4",
     "concurrently": "^8.2.2",
-    "eslint": "^9",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "vite": "^6.1.0"
+    "eslint": "^9"
   }
 }
