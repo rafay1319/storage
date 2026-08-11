@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { DashboardPage } from '@/pages/DashboardPage';
+import { FeedPage } from '@/pages/FeedPage';
 import { FacilitiesPage } from '@/pages/FacilitiesPage';
 import { MapPage } from '@/pages/MapPage';
 import { ContainersPage } from '@/pages/ContainersPage';
@@ -16,6 +17,7 @@ export function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<DashboardPage />} />
+        <Route path="/feed" element={<FeedPage />} />
         <Route path="/facilities" element={<FacilitiesPage />} />
         <Route path="/map" element={<MapPage />} />
         <Route path="/containers" element={<ContainersPage />} />
