@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Header } from '@/components/layout/Header';
@@ -7,9 +5,9 @@ import { CommandPalette } from '@/components/layout/CommandPalette';
 import { ContainerDetailModal } from '@/components/map/ContainerDetailModal';
 import { INITIAL_FACILITIES, INITIAL_CONTAINERS, INITIAL_CUSTOMERS, INITIAL_TASKS } from '@/lib/mockData';
 import { Container } from '@/lib/types';
-import { Box, Plus, Search, Filter, QrCode, ShieldCheck, Wrench } from 'lucide-react';
+import { Box, Plus, Search, QrCode } from 'lucide-react';
 
-export default function ContainersPage() {
+export function ContainersPage() {
   const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
   const [selectedFacilityId, setSelectedFacilityId] = useState('ALL');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);

@@ -1,12 +1,10 @@
-'use client';
-
 import React, { useState } from 'react';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Header } from '@/components/layout/Header';
 import { CommandPalette } from '@/components/layout/CommandPalette';
 import { AIInsightsCard } from '@/components/analytics/AIInsightsCard';
 import { INITIAL_FACILITIES, INITIAL_CONTAINERS, INITIAL_CUSTOMERS, INITIAL_TASKS, INITIAL_AI_INSIGHTS } from '@/lib/mockData';
-import { Sparkles, TrendingUp, AlertTriangle, ShieldCheck, ArrowUpRight } from 'lucide-react';
+import { Sparkles, TrendingUp } from 'lucide-react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
 const forecastData = [
@@ -18,7 +16,7 @@ const forecastData = [
   { month: 'Jan 2027', predictedRevenue: 64500, predictedOccupancy: 96 }
 ];
 
-export default function AIInsightsPage() {
+export function AiInsightsPage() {
   const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
   const [selectedFacilityId, setSelectedFacilityId] = useState('ALL');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);

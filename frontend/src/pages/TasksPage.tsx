@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Header } from '@/components/layout/Header';
@@ -7,9 +5,9 @@ import { CommandPalette } from '@/components/layout/CommandPalette';
 import { MobileReportModal } from '@/components/tasks/MobileReportModal';
 import { INITIAL_FACILITIES, INITIAL_CONTAINERS, INITIAL_CUSTOMERS, INITIAL_TASKS } from '@/lib/mockData';
 import { Task } from '@/lib/types';
-import { ClipboardCheck, Plus, CheckCircle2, Clock, Smartphone, UserCheck, AlertTriangle } from 'lucide-react';
+import { ClipboardCheck, Plus, Smartphone } from 'lucide-react';
 
-export default function TasksPage() {
+export function TasksPage() {
   const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
   const [selectedFacilityId, setSelectedFacilityId] = useState('ALL');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);

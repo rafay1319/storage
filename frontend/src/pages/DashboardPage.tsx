@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Header } from '@/components/layout/Header';
@@ -20,16 +18,12 @@ import { Container } from '@/lib/types';
 import { 
   DollarSign, 
   Warehouse, 
-  Box, 
   TrendingUp, 
   Users, 
-  CheckCircle2, 
-  AlertCircle, 
   ArrowUpRight,
-  ShieldCheck
 } from 'lucide-react';
 
-export default function ExecutiveDashboard() {
+export function DashboardPage() {
   const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
   const [selectedFacilityId, setSelectedFacilityId] = useState('ALL');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);

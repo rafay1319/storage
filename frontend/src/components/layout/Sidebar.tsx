@@ -1,8 +1,5 @@
-'use client';
-
 import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Warehouse, 
@@ -23,7 +20,8 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ currentRole, onRoleChange }) => {
-  const pathname = usePathname();
+  const location = useLocation();
+  const pathname = location.pathname;
 
   const navItems = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -75,7 +73,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentRole, onRoleChange }) =
           return (
             <Link
               key={item.href}
-              href={item.href}
+              to={item.href}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-xs transition-all duration-150 ${
                 isActive
                   ? 'bg-blue-600/15 text-blue-400 border-l-4 border-blue-500 font-semibold shadow-sm'
