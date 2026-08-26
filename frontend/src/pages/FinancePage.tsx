@@ -28,7 +28,7 @@ export function FinancePage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-950 text-slate-100 font-sans">
+    <div className="flex min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-500/20 selection:text-blue-900">
       <Sidebar currentRole={currentRole} onRoleChange={setCurrentRole} />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -39,29 +39,29 @@ export function FinancePage() {
           onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         />
 
-        <main className="p-8 space-y-8 overflow-y-auto">
-          <div className="flex flex-wrap items-center justify-between gap-4">
+        <main className="p-6 space-y-5 overflow-y-auto">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h1 className="text-2xl font-black text-white flex items-center gap-2">
-                <DollarSign className="w-6 h-6 text-emerald-400" /> Executive Financial Accounting & P&L
+              <h1 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                Executive Accounting & P&L Statement
               </h1>
-              <p className="text-xs text-slate-400 mt-1">
-                Multi-yard income statement, operating expenses, cash flow analysis, and balance ledgers.
+              <p className="text-xs text-slate-500 mt-0.5">
+                Multi-yard income statement, cash flow velocity, operating costs, and balance ledgers.
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <button
                 onClick={handleExportCSV}
                 disabled={isExporting}
-                className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl border border-slate-700 transition-all"
+                className="flex items-center gap-1.5 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-200 shadow-2xs transition-all"
               >
-                <Download className="w-4 h-4 text-emerald-400" />
-                <span>{isExporting ? 'Generating CSV...' : 'Export Financial CSV'}</span>
+                <Download className="w-3.5 h-3.5 text-emerald-600" />
+                <span>{isExporting ? 'Generating...' : 'Export CSV'}</span>
               </button>
-              <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-lg shadow-blue-600/20 transition-all">
-                <Plus className="w-4 h-4" />
-                <span>Log Operating Expense</span>
+              <button className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-xs shadow-blue-500/20 transition-all">
+                <Plus className="w-3.5 h-3.5" />
+                <span>Log Expense</span>
               </button>
             </div>
           </div>

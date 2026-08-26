@@ -43,7 +43,7 @@ export function DashboardPage() {
   const avgOccupancyRate = Math.round((totalOccupiedCount / totalContainersCount) * 100);
 
   return (
-    <div className="flex min-h-screen bg-slate-950 text-slate-100 font-sans">
+    <div className="flex min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-500/20 selection:text-blue-900">
       {/* Sidebar */}
       <Sidebar currentRole={currentRole} onRoleChange={setCurrentRole} />
 
@@ -58,30 +58,31 @@ export function DashboardPage() {
         />
 
         {/* Dashboard Body */}
-        <main className="p-8 space-y-8 overflow-y-auto">
+        <main className="p-6 space-y-5 overflow-y-auto">
           {/* Welcome & Persona Banner */}
-          <div className="flex flex-wrap items-center justify-between gap-4 bg-gradient-to-r from-blue-900/40 via-slate-900 to-indigo-900/30 border border-slate-800 p-6 rounded-3xl shadow-xl">
+          <div className="flex flex-wrap items-center justify-between gap-4 bg-white border border-slate-200 p-5 rounded-2xl shadow-xs relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-96 h-full bg-gradient-to-l from-blue-50 via-indigo-50/30 to-transparent pointer-events-none"></div>
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest bg-cyan-500/10 px-2.5 py-0.5 rounded-full border border-cyan-500/20">
-                  Global Control Tower
+                <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
+                  Global Operations
                 </span>
-                <span className="text-xs text-slate-400">• Multi-Yard Network active</span>
+                <span className="text-[11px] text-slate-500">• Multi-Yard Network Telemetry</span>
               </div>
-              <h1 className="text-2xl font-black text-white tracking-tight">Storage Facility Command Dashboard</h1>
-              <p className="text-xs text-slate-400 mt-1 max-w-xl">
-                Real-time operational health across {facilities.length} storage yards and {totalContainersCount} shipping container units.
+              <h1 className="text-xl font-bold text-slate-900 tracking-tight">Yard Operations & Inventory Hub</h1>
+              <p className="text-xs text-slate-500 mt-0.5 max-w-xl">
+                Real-time operational telemetry across {facilities.length} active facilities and {totalContainersCount} container units.
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="text-right border-r border-slate-800 pr-4">
-                <span className="text-[10px] text-slate-400 uppercase font-bold block">Portfolio Profitability</span>
-                <span className="text-xl font-black text-emerald-400 font-mono">${totalNetProfit.toLocaleString()}/mo</span>
+            <div className="flex items-center gap-4">
+              <div className="text-right border-r border-slate-200 pr-4">
+                <span className="text-[10px] text-slate-500 uppercase font-semibold block">Monthly Net Run Rate</span>
+                <span className="text-lg font-bold text-emerald-700 font-mono">${totalNetProfit.toLocaleString()}<span className="text-xs font-normal text-slate-500">/mo</span></span>
               </div>
               <div className="text-right">
-                <span className="text-[10px] text-slate-400 uppercase font-bold block">Avg Fill Rate</span>
-                <span className="text-xl font-black text-cyan-400 font-mono">{avgOccupancyRate}%</span>
+                <span className="text-[10px] text-slate-500 uppercase font-semibold block">Portfolio Fill Rate</span>
+                <span className="text-lg font-bold text-blue-700 font-mono">{avgOccupancyRate}%</span>
               </div>
             </div>
           </div>
@@ -90,56 +91,60 @@ export function DashboardPage() {
           <AIInsightsCard insights={INITIAL_AI_INSIGHTS} />
 
           {/* Core Metric Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div className="bg-slate-900 border border-slate-800 p-5 rounded-3xl shadow-lg space-y-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            {/* 1. Gross Revenue */}
+            <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-xs space-y-1.5 hover:border-slate-300 transition-colors">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Gross Monthly Revenue</span>
-                <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                  <DollarSign className="w-4 h-4" />
+                <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Gross Monthly Revenue</span>
+                <div className="p-1.5 rounded-lg bg-blue-50 text-blue-600 border border-blue-200">
+                  <DollarSign className="w-3.5 h-3.5" />
                 </div>
               </div>
-              <div className="text-2xl font-black text-white font-mono">${totalRevenue.toLocaleString()}</div>
-              <div className="flex items-center gap-1 text-[11px] text-emerald-400 font-semibold">
-                <ArrowUpRight className="w-3.5 h-3.5" />
+              <div className="text-xl font-bold text-slate-900 font-mono">${totalRevenue.toLocaleString()}</div>
+              <div className="flex items-center gap-1 text-[10px] text-emerald-700 font-medium">
+                <ArrowUpRight className="w-3 h-3" />
                 <span>+14.2% vs previous month</span>
               </div>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 p-5 rounded-3xl shadow-lg space-y-2">
+            {/* 2. Net Profit */}
+            <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-xs space-y-1.5 hover:border-slate-300 transition-colors">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Net Profit Margin</span>
-                <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  <TrendingUp className="w-4 h-4" />
+                <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Net Operating Profit</span>
+                <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200">
+                  <TrendingUp className="w-3.5 h-3.5" />
                 </div>
               </div>
-              <div className="text-2xl font-black text-emerald-400 font-mono">${totalNetProfit.toLocaleString()}</div>
-              <div className="text-[11px] text-slate-400 font-medium">
+              <div className="text-xl font-bold text-emerald-700 font-mono">${totalNetProfit.toLocaleString()}</div>
+              <div className="text-[10px] text-slate-500 font-medium">
                 Operating Cost: ${totalExpenses.toLocaleString()}
               </div>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 p-5 rounded-3xl shadow-lg space-y-2">
+            {/* 3. Occupancy */}
+            <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-xs space-y-1.5 hover:border-slate-300 transition-colors">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Occupancy Utilization</span>
-                <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-                  <Warehouse className="w-4 h-4" />
+                <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Yard Occupancy Rate</span>
+                <div className="p-1.5 rounded-lg bg-cyan-50 text-cyan-600 border border-cyan-200">
+                  <Warehouse className="w-3.5 h-3.5" />
                 </div>
               </div>
-              <div className="text-2xl font-black text-cyan-400 font-mono">{avgOccupancyRate}%</div>
-              <div className="text-[11px] text-slate-400 font-medium">
+              <div className="text-xl font-bold text-blue-700 font-mono">{avgOccupancyRate}%</div>
+              <div className="text-[10px] text-slate-500 font-medium">
                 {totalOccupiedCount} of {totalContainersCount} containers leased
               </div>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 p-5 rounded-3xl shadow-lg space-y-2">
+            {/* 4. Customers */}
+            <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-xs space-y-1.5 hover:border-slate-300 transition-colors">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Active Customers</span>
-                <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                  <Users className="w-4 h-4" />
+                <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Active CRM Accounts</span>
+                <div className="p-1.5 rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-200">
+                  <Users className="w-3.5 h-3.5" />
                 </div>
               </div>
-              <div className="text-2xl font-black text-white font-mono">{INITIAL_CUSTOMERS.length}</div>
-              <div className="text-[11px] text-slate-400 font-medium">
+              <div className="text-xl font-bold text-slate-900 font-mono">{INITIAL_CUSTOMERS.length}</div>
+              <div className="text-[10px] text-slate-500 font-medium">
                 0 account delinquencies
               </div>
             </div>

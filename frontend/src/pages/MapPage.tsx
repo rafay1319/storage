@@ -17,7 +17,7 @@ export function MapPage() {
   const containers = INITIAL_CONTAINERS.filter(c => c.facilityId === activeFacility.id);
 
   return (
-    <div className="flex min-h-screen bg-slate-950 text-slate-100 font-sans">
+    <div className="flex min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-500/20 selection:text-blue-900">
       <Sidebar currentRole={currentRole} onRoleChange={setCurrentRole} />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -28,17 +28,19 @@ export function MapPage() {
           onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         />
 
-        <main className="p-8 space-y-6 overflow-y-auto">
+        <main className="p-6 space-y-5 overflow-y-auto">
           {/* Yard Title */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h1 className="text-2xl font-black text-white">{activeFacility.name}</h1>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <h1 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                {activeFacility.name}
+              </h1>
+              <p className="text-xs text-slate-500 mt-0.5">
                 {activeFacility.address}, {activeFacility.city} • Grid: {activeFacility.gridRows} Rows x {activeFacility.gridCols} Cols
               </p>
             </div>
-            <span className="bg-cyan-500/20 text-cyan-300 font-mono font-bold text-xs px-3 py-1 rounded-full border border-cyan-500/30">
-              {containers.length} Containers Plotted
+            <span className="bg-blue-50 text-blue-700 font-mono font-semibold text-xs px-2.5 py-1 rounded-full border border-blue-200">
+              {containers.length} Units Plotted
             </span>
           </div>
 

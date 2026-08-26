@@ -22,7 +22,7 @@ export function AiInsightsPage() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-slate-950 text-slate-100 font-sans">
+    <div className="flex min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-500/20 selection:text-blue-900">
       <Sidebar currentRole={currentRole} onRoleChange={setCurrentRole} />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -33,50 +33,54 @@ export function AiInsightsPage() {
           onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         />
 
-        <main className="p-8 space-y-8 overflow-y-auto">
+        <main className="p-6 space-y-5 overflow-y-auto">
           <div>
-            <h1 className="text-2xl font-black text-white flex items-center gap-2">
-              <Sparkles className="w-6 h-6 text-indigo-400 animate-pulse" /> AI Business Intelligence Suite
+            <h1 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-indigo-600" /> AI Business Intelligence Suite
             </h1>
-            <p className="text-xs text-slate-400 mt-1">
-              Autonomous forecast engine, fill-rate elasticity analysis, loss prevention, and smart pricing recommendations.
+            <p className="text-xs text-slate-500 mt-0.5">
+              Autonomous forecast engine, fill-rate elasticity analysis, loss prevention, and dynamic pricing models.
             </p>
           </div>
 
           <AIInsightsCard insights={INITIAL_AI_INSIGHTS} />
 
           {/* 6-Month Predictive Forecast Chart */}
-          <div className="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="font-bold text-base text-white flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-cyan-400" />
-                  6-Month AI Revenue & Occupancy Forecast
-                </h3>
-                <p className="text-xs text-slate-400 mt-0.5">Machine learning projection based on historical lease velocity</p>
+          <div className="bg-white border border-slate-200 p-5 rounded-2xl shadow-xs space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center">
+                  <TrendingUp className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold text-slate-900 tracking-tight">
+                    6-Month Predictive Revenue & Lease Velocity
+                  </h3>
+                  <p className="text-[10px] text-slate-500">ML projection based on historical lease velocity and regional price sensitivity</p>
+                </div>
               </div>
-              <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
+              <span className="text-[10px] font-mono font-semibold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
                 Confidence: 94.2%
               </span>
             </div>
 
-            <div className="h-72">
+            <div className="h-64 pt-2">
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={forecastData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
+                <AreaChart data={forecastData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
-                    <linearGradient id="colorForecast" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.4}/>
-                      <stop offset="95%" stopColor="#06b6d4" stopOpacity={0}/>
+                    <linearGradient id="colorForecastLight" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#0284c7" stopOpacity={0.25}/>
+                      <stop offset="95%" stopColor="#0284c7" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                  <XAxis dataKey="month" stroke="#64748b" fontSize={11} />
-                  <YAxis stroke="#64748b" fontSize={11} tickFormatter={(v) => `$${v / 1000}k`} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                  <XAxis dataKey="month" stroke="#94a3b8" fontSize={10} tickLine={false} />
+                  <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} tickFormatter={(v) => `$${v / 1000}k`} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '12px', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', fontSize: '11px', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}
                     formatter={(val: any) => [`$${Number(val).toLocaleString()}`, 'Predicted Revenue']}
                   />
-                  <Area type="monotone" dataKey="predictedRevenue" stroke="#06b6d4" strokeWidth={3} fillOpacity={1} fill="url(#colorForecast)" />
+                  <Area type="monotone" dataKey="predictedRevenue" stroke="#0284c7" strokeWidth={2} fillOpacity={1} fill="url(#colorForecastLight)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>

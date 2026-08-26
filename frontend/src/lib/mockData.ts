@@ -1,6 +1,5 @@
 import { Facility, Container, Customer, RentalAgreement, Task, AIInsight, FeedItem } from './types';
 
-
 export const INITIAL_FACILITIES: Facility[] = [
   {
     id: 'fac-001',
@@ -109,9 +108,7 @@ export const INITIAL_FACILITIES: Facility[] = [
   }
 ];
 
-// Generate Grid Containers for Facility 1 (Austin Port Terminal)
 export const INITIAL_CONTAINERS: Container[] = [
-  // Row 0
   { id: 'c-101', containerNumber: 'ATX-2001', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Occupied', rentalPrice: 450, purchaseCost: 4800, currentValue: 4200, insuranceValue: 6000, posX: 0, posY: 0, qrCode: 'QR-ATX-2001', barcode: 'BC-ATX-2001', currentCustomerName: 'Sarah Connor', currentCustomerCompany: 'Apex Global Logistics', lastInspectedAt: '2026-07-15', photos: ['https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500'] },
   { id: 'c-102', containerNumber: 'ATX-2002', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '40ft', type: 'Climate Controlled', status: 'Occupied', rentalPrice: 750, purchaseCost: 8200, currentValue: 7500, insuranceValue: 10000, posX: 1, posY: 0, qrCode: 'QR-ATX-2002', barcode: 'BC-ATX-2002', currentCustomerName: 'David Miller', currentCustomerCompany: 'Boulder Construction LLC', lastInspectedAt: '2026-07-20', photos: [] },
   { id: 'c-103', containerNumber: 'ATX-2003', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Available', rentalPrice: 450, purchaseCost: 4800, currentValue: 4400, insuranceValue: 6000, posX: 2, posY: 0, qrCode: 'QR-ATX-2003', barcode: 'BC-ATX-2003', lastInspectedAt: '2026-07-28', photos: [] },
@@ -119,27 +116,7 @@ export const INITIAL_CONTAINERS: Container[] = [
   { id: 'c-105', containerNumber: 'ATX-2005', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Occupied', rentalPrice: 450, purchaseCost: 4800, currentValue: 4300, insuranceValue: 6000, posX: 4, posY: 0, qrCode: 'QR-ATX-2005', barcode: 'BC-ATX-2005', currentCustomerName: 'Marcus Vance', currentCustomerCompany: 'Vance Tech Sol', lastInspectedAt: '2026-06-30', photos: [] },
   { id: 'c-106', containerNumber: 'ATX-2006', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '45ft', type: 'Refrigerated', status: 'Reserved', rentalPrice: 950, purchaseCost: 11000, currentValue: 9800, insuranceValue: 14000, posX: 5, posY: 0, qrCode: 'QR-ATX-2006', barcode: 'BC-ATX-2006', lastInspectedAt: '2026-07-25', photos: [] },
   { id: 'c-107', containerNumber: 'ATX-2007', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Occupied', rentalPrice: 450, purchaseCost: 4800, currentValue: 4400, insuranceValue: 6000, posX: 6, posY: 0, qrCode: 'QR-ATX-2007', barcode: 'BC-ATX-2007', currentCustomerName: 'Elena Rostova', currentCustomerCompany: 'Gulf Coast Importers', photos: [] },
-  { id: 'c-108', containerNumber: 'ATX-2008', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Cleaning', rentalPrice: 450, purchaseCost: 4800, currentValue: 4300, insuranceValue: 6000, posX: 7, posY: 0, qrCode: 'QR-ATX-2008', barcode: 'BC-ATX-2008', lastInspectedAt: '2026-07-29', notes: 'Scheduled for pressure washing after lease turnover.', photos: [] },
-
-  // Row 1
-  { id: 'c-109', containerNumber: 'ATX-2009', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '40ft', type: 'Storage', status: 'Occupied', rentalPrice: 700, purchaseCost: 7800, currentValue: 7100, insuranceValue: 9500, posX: 0, posY: 1, qrCode: 'QR-ATX-2009', barcode: 'BC-ATX-2009', currentCustomerName: 'Sarah Connor', currentCustomerCompany: 'Apex Global Logistics', photos: [] },
-  { id: 'c-110', containerNumber: 'ATX-2010', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Occupied', rentalPrice: 450, purchaseCost: 4800, currentValue: 4200, insuranceValue: 6000, posX: 1, posY: 1, qrCode: 'QR-ATX-2010', barcode: 'BC-ATX-2010', currentCustomerName: 'James Sterling', currentCustomerCompany: 'Sterling Auto Parts', photos: [] },
-  { id: 'c-111', containerNumber: 'ATX-2011', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Available', rentalPrice: 450, purchaseCost: 4800, currentValue: 4400, insuranceValue: 6000, posX: 2, posY: 1, qrCode: 'QR-ATX-2011', barcode: 'BC-ATX-2011', photos: [] },
-  { id: 'c-112', containerNumber: 'ATX-2012', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '40ft', type: 'Climate Controlled', status: 'Occupied', rentalPrice: 750, purchaseCost: 8200, currentValue: 7600, insuranceValue: 10000, posX: 3, posY: 1, qrCode: 'QR-ATX-2012', barcode: 'BC-ATX-2012', currentCustomerName: 'Patricia Bell', currentCustomerCompany: 'Bell Event Planning', photos: [] },
-  { id: 'c-113', containerNumber: 'ATX-2013', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Occupied', rentalPrice: 450, purchaseCost: 4800, currentValue: 4300, insuranceValue: 6000, posX: 4, posY: 1, qrCode: 'QR-ATX-2013', barcode: 'BC-ATX-2013', currentCustomerName: 'David Miller', currentCustomerCompany: 'Boulder Construction LLC', photos: [] },
-  { id: 'c-114', containerNumber: 'ATX-2014', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Out of Service', rentalPrice: 450, purchaseCost: 4800, currentValue: 2500, insuranceValue: 6000, posX: 5, posY: 1, qrCode: 'QR-ATX-2014', barcode: 'BC-ATX-2014', notes: 'Severe dent in side panel. Under structural review.', photos: [] },
-  { id: 'c-115', containerNumber: 'ATX-2015', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '40ft', type: 'Storage', status: 'Occupied', rentalPrice: 700, purchaseCost: 7800, currentValue: 7200, insuranceValue: 9500, posX: 6, posY: 1, qrCode: 'QR-ATX-2015', barcode: 'BC-ATX-2015', currentCustomerName: 'Robert Lang', currentCustomerCompany: 'Lang Furniture Warehouse', photos: [] },
-  { id: 'c-116', containerNumber: 'ATX-2016', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Available', rentalPrice: 450, purchaseCost: 4800, currentValue: 4400, insuranceValue: 6000, posX: 7, posY: 1, qrCode: 'QR-ATX-2016', barcode: 'BC-ATX-2016', photos: [] },
-
-  // Row 2
-  { id: 'c-117', containerNumber: 'ATX-2017', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Occupied', rentalPrice: 450, purchaseCost: 4800, currentValue: 4300, insuranceValue: 6000, posX: 0, posY: 2, qrCode: 'QR-ATX-2017', barcode: 'BC-ATX-2017', currentCustomerName: 'Sarah Connor', currentCustomerCompany: 'Apex Global Logistics', photos: [] },
-  { id: 'c-118', containerNumber: 'ATX-2018', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '40ft', type: 'Open Top', status: 'Occupied', rentalPrice: 800, purchaseCost: 8900, currentValue: 8000, insuranceValue: 11000, posX: 1, posY: 2, qrCode: 'QR-ATX-2018', barcode: 'BC-ATX-2018', currentCustomerName: 'Austin Steel Works', currentCustomerCompany: 'Austin Steel Works', photos: [] },
-  { id: 'c-119', containerNumber: 'ATX-2019', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Available', rentalPrice: 450, purchaseCost: 4800, currentValue: 4400, insuranceValue: 6000, posX: 2, posY: 2, qrCode: 'QR-ATX-2019', barcode: 'BC-ATX-2019', photos: [] },
-  { id: 'c-120', containerNumber: 'ATX-2020', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Occupied', rentalPrice: 450, purchaseCost: 4800, currentValue: 4300, insuranceValue: 6000, posX: 3, posY: 2, qrCode: 'QR-ATX-2020', barcode: 'BC-ATX-2020', currentCustomerName: 'Patricia Bell', currentCustomerCompany: 'Bell Event Planning', photos: [] },
-  { id: 'c-121', containerNumber: 'ATX-2021', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '40ft', type: 'Storage', status: 'Occupied', rentalPrice: 700, purchaseCost: 7800, currentValue: 7200, insuranceValue: 9500, posX: 4, posY: 2, qrCode: 'QR-ATX-2021', barcode: 'BC-ATX-2021', currentCustomerName: 'David Miller', currentCustomerCompany: 'Boulder Construction LLC', photos: [] },
-  { id: 'c-122', containerNumber: 'ATX-2022', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Occupied', rentalPrice: 450, purchaseCost: 4800, currentValue: 4300, insuranceValue: 6000, posX: 5, posY: 2, qrCode: 'QR-ATX-2022', barcode: 'BC-ATX-2022', currentCustomerName: 'Marcus Vance', currentCustomerCompany: 'Vance Tech Sol', photos: [] },
-  { id: 'c-123', containerNumber: 'ATX-2023', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Occupied', rentalPrice: 450, purchaseCost: 4800, currentValue: 4300, insuranceValue: 6000, posX: 6, posY: 2, qrCode: 'QR-ATX-2023', barcode: 'BC-ATX-2023', currentCustomerName: 'James Sterling', currentCustomerCompany: 'Sterling Auto Parts', photos: [] },
-  { id: 'c-124', containerNumber: 'ATX-2024', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '40ft', type: 'Climate Controlled', status: 'Occupied', rentalPrice: 750, purchaseCost: 8200, currentValue: 7600, insuranceValue: 10000, posX: 7, posY: 2, qrCode: 'QR-ATX-2024', barcode: 'BC-ATX-2024', currentCustomerName: 'Sarah Connor', currentCustomerCompany: 'Apex Global Logistics', photos: [] }
+  { id: 'c-108', containerNumber: 'ATX-2008', facilityId: 'fac-001', facilityName: 'Austin Port Terminal Yard', size: '20ft', type: 'Storage', status: 'Cleaning', rentalPrice: 450, purchaseCost: 4800, currentValue: 4300, insuranceValue: 6000, posX: 7, posY: 0, qrCode: 'QR-ATX-2008', barcode: 'BC-ATX-2008', lastInspectedAt: '2026-07-29', notes: 'Scheduled for pressure washing after lease turnover.', photos: [] }
 ];
 
 export const INITIAL_CUSTOMERS: Customer[] = [
@@ -164,115 +141,190 @@ export const INITIAL_AI_INSIGHTS: AIInsight[] = [
 export const INITIAL_FEED_ITEMS: FeedItem[] = [
   {
     id: 'feed-001',
-    timestamp: '2 mins ago',
+    timestamp: '15 mins ago',
     category: 'GATE_MOVE',
-    title: 'Container Inbound Gate Check-In',
-    description: 'Heavy duty flatbed tractor unit checked in container ATX-2024 at Gate 2. Position assigned: Row 7, Stacking Bay 2.',
+    title: 'Automated RFID Gate Entry Check-In',
+    description: 'Flatbed haulage tractor unit checked in 40ft High-Cube container #ATX-2024 at Gate 2. Positioned at Stacking Bay 2.',
+    caption: 'Fresh container unit checked in at Gate 2! Securely stacked into Bay 2 and ready for Apex Global Logistics cargo loading. 🚛📦 #AustinPort #ContainerLogistics #GateOperations #YardLife',
     facilityId: 'fac-001',
     facilityName: 'Austin Port Terminal Yard',
     containerNumber: 'ATX-2024',
     customerName: 'Apex Global Logistics',
     actorName: 'Jason Miller',
     actorRole: 'Yard Facility Manager',
+    actorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
     severity: 'info',
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1000',
+    likesCount: 24,
+    isLiked: false,
+    isSaved: false,
+    linkedTask: {
+      taskNumber: 'TSK-10488',
+      taskTitle: 'Gate 2 Inbound Haulage Check-In & Slot Assignment',
+      assignedTo: 'Jason Miller',
+      priority: 'Medium',
+      status: 'Completed',
+      reply: {
+        authorName: 'Jason Miller',
+        authorRole: 'Yard Manager',
+        authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
+        text: 'Unit #ATX-2024 checked in from flatbed tractor, weighed at 18,400 kg, and safely stacked into Bay 2. Manifest cleared.',
+        timestamp: '12m ago'
+      }
+    },
+    comments: [
+      {
+        id: 'c-1',
+        authorName: 'Sarah Connor',
+        authorRole: 'Apex Global Logistics',
+        authorAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150',
+        text: 'Driver confirmed safe delivery. Thanks for the quick gate turnaround! 🚛📦',
+        timestamp: '10m ago',
+        likes: 3
+      },
+      {
+        id: 'c-2',
+        authorName: 'Carlos Ramirez',
+        authorRole: 'Field Tech',
+        authorAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
+        text: 'Inspected exterior seal. Everything is in pristine shape.',
+        timestamp: '5m ago',
+        likes: 1
+      }
+    ],
     actionable: true,
     actionLabel: 'View Gate Ticket',
     metadata: { gateNumber: 'Gate 2', driverName: 'Marcus Vance', grossWeightKg: 18400 }
   },
   {
     id: 'feed-002',
-    timestamp: '14 mins ago',
-    category: 'AI_ALERT',
-    title: 'Reefer Unit Temperature Anomaly Detected',
-    description: 'AI IoT Telemetry flagged temperature variation (+3.8°C above target) for Refrigerated Container LBH-1002.',
-    facilityId: 'fac-002',
-    facilityName: 'Long Beach Harbor Storage',
-    containerNumber: 'LBH-1002',
-    actorName: 'CY AI Engine',
-    actorRole: 'Automated System Sentinel',
-    severity: 'danger',
-    actionable: true,
-    actionLabel: 'Dispatch Emergency Tech',
-    metadata: { targetTempC: -18, actualTempC: -14.2, compressorPressureBar: 12.4 }
-  },
-  {
-    id: 'feed-003',
-    timestamp: '32 mins ago',
-    category: 'RENTAL_PAYMENT',
-    title: 'Automated Lease Renewal Payment Received',
-    description: 'Stripe ACH payment of $1,850.00 processed successfully for monthly rental agreement #RNT-2026-089.',
-    facilityId: 'fac-002',
-    facilityName: 'Long Beach Harbor Storage',
-    containerNumber: 'LBH-1005',
-    customerName: 'Pacific Rim Freight',
-    actorName: 'System Billing Bot',
-    actorRole: 'Financial Automation',
-    severity: 'success',
-    actionable: false,
-    metadata: { amount: 1850, invoiceId: 'INV-88392', cycle: 'Monthly' }
-  },
-  {
-    id: 'feed-004',
-    timestamp: '1 hour ago',
+    timestamp: '45 mins ago',
     category: 'INSPECTION',
-    title: 'Mobile Inspection Report Uploaded',
-    description: 'Carlos Ramirez submitted digital inspection report #TSK-10492 for container ATX-2004. Door gasket repaired and sealed.',
+    title: 'Completed Heavy Seal Repair on Container ATX-2004',
+    description: 'Replaced cracked perimeter rubber weather seals and applied marine-grade anti-rust inhibitor. Passed pressure test at 100%.',
+    caption: 'Full gasket overhaul completed on #ATX-2004. Replaced cracked rubber with heavy-duty marine EPDM and applied weather seal coating. Ready for immediate deployment! 🔧✨ #FieldTech #YardMaintenance #QualityControl',
     facilityId: 'fac-001',
     facilityName: 'Austin Port Terminal Yard',
     containerNumber: 'ATX-2004',
     actorName: 'Carlos Ramirez',
     actorRole: 'Field Service Tech',
-    severity: 'info',
+    actorAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
+    severity: 'success',
+    image: 'https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1000',
+    likesCount: 42,
+    isLiked: true,
+    isSaved: true,
+    linkedTask: {
+      taskNumber: 'TSK-10492',
+      taskTitle: 'Container ATX-2004 Weather Seal & Gasket Replacement',
+      assignedTo: 'Carlos Ramirez',
+      priority: 'High',
+      status: 'Completed',
+      reply: {
+        authorName: 'Carlos Ramirez',
+        authorRole: 'Field Tech Lead',
+        authorAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
+        text: 'Replaced both door seals with grade-A marine EPDM and completed 100% airtight pressure test. Inspection photos uploaded below.',
+        timestamp: '40m ago'
+      }
+    },
+    comments: [
+      {
+        id: 'c-3',
+        authorName: 'Eleanor Vance',
+        authorRole: 'Chief Executive',
+        authorAvatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150',
+        text: 'Great work getting this turned around under 2 hours Carlos! 👏',
+        timestamp: '30m ago',
+        likes: 6
+      }
+    ],
     actionable: true,
-    actionLabel: 'Inspect Report & Photos',
-    metadata: { photosUploaded: 3, passScorePercent: 98, repairCost: 85 }
+    actionLabel: 'View Field Report',
+    metadata: { repairTimeMins: 45, costMaterials: '$85.00', sealGrade: 'EPDM Marine' }
   },
   {
-    id: 'feed-005',
+    id: 'feed-003',
     timestamp: '2 hours ago',
-    category: 'MAINTENANCE',
-    title: 'Forklift Hydraulic Servicing Scheduled',
-    description: 'Scheduled preventative maintenance for 45-Ton Heavy Stacker #FL-04 at Miami Inland Container Depot.',
-    facilityId: 'fac-004',
-    facilityName: 'Miami Inland Container Depot',
-    actorName: 'Elena Rostova',
-    actorRole: 'Yard Operations Lead',
-    severity: 'warning',
+    category: 'AI_ALERT',
+    title: 'Reefer Unit Temperature Anomaly Detected & Resolved',
+    description: 'AI IoT Telemetry flagged temperature variation (+3.8°C above target) for Refrigerated Container #LBH-1002. Backup chiller auto-engaged.',
+    caption: 'Reefer #LBH-1002 temperature anomaly intercepted and corrected by automated telemetry AI. Sensor logs confirm full cargo integrity. ❄️🤖 #SmartYard #IoTCargo #ColdChainSecurity #AutomatedStorage',
+    facilityId: 'fac-002',
+    facilityName: 'Long Beach Harbor Storage',
+    containerNumber: 'LBH-1002',
+    actorName: 'CY AI Engine',
+    actorRole: 'Automated System Sentinel',
+    actorAvatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150',
+    severity: 'danger',
+    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1000',
+    likesCount: 18,
+    isLiked: false,
+    isSaved: false,
+    linkedTask: {
+      taskNumber: 'TSK-AI-902',
+      taskTitle: 'Refrigeration Chiller Telemetry Anomaly Investigation',
+      assignedTo: 'Sarah Jenkins',
+      priority: 'Emergency',
+      status: 'Completed',
+      reply: {
+        authorName: 'Sarah Jenkins',
+        authorRole: 'Yard Manager',
+        authorAvatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150',
+        text: 'Secondary refrigeration loop activated autonomously. Container temp normalized back to -18.5°C with zero cargo disruption.',
+        timestamp: '1h 50m ago'
+      }
+    },
+    comments: [
+      {
+        id: 'c-4',
+        authorName: 'Sarah Jenkins',
+        authorRole: 'Yard Manager',
+        authorAvatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150',
+        text: 'Temperature normalized back to -18.5°C within 12 minutes. Zero cargo loss.',
+        timestamp: '1h ago',
+        likes: 4
+      }
+    ],
     actionable: true,
-    actionLabel: 'View Schedule',
-    metadata: { equipmentId: 'FL-04', downtimeEstHours: 4 }
+    actionLabel: 'View Sensor Telemetry',
+    metadata: { targetTempC: -18, actualTempC: -14.2, compressorPressureBar: 12.4 }
   },
   {
-    id: 'feed-006',
-    timestamp: '3 hours ago',
+    id: 'feed-004',
+    timestamp: '4 hours ago',
     category: 'RENTAL_PAYMENT',
-    title: 'New Customer Lease Contract Signed',
-    description: 'Digital signature verified for 20ft Storage Unit ATX-2002. Customer: Boulder Construction LLC.',
+    title: 'New Commercial Lease Signed - 40ft Climate Unit',
+    description: 'Boulder Construction LLC executed a 12-month commercial lease for High-Cube container #ATX-2002. First month rent + deposit cleared via ACH.',
+    caption: 'Welcoming Boulder Construction LLC to Austin Port Terminal! 12-month lease executed for #ATX-2002 climate storage unit. 🏢📝💰 #NewTenant #CommercialStorage #LeaseSigned #YardGrowth',
     facilityId: 'fac-001',
     facilityName: 'Austin Port Terminal Yard',
     containerNumber: 'ATX-2002',
     customerName: 'Boulder Construction LLC',
     actorName: 'David Miller',
-    actorRole: 'Customer Representative',
+    actorRole: 'Managing Director',
+    actorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
     severity: 'success',
+    likesCount: 31,
+    isLiked: false,
+    isSaved: false,
+    linkedTask: {
+      taskNumber: 'TSK-10480',
+      taskTitle: 'Unit ATX-2002 Customer Handover & Keycard Activation',
+      assignedTo: 'Jason Miller',
+      priority: 'Medium',
+      status: 'Completed',
+      reply: {
+        authorName: 'David Miller',
+        authorRole: 'Boulder Construction LLC',
+        authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
+        text: 'Agreement signed and access keycards received for our equipment crew. Smooth onboarding process!',
+        timestamp: '3h 45m ago'
+      }
+    },
+    comments: [],
     actionable: true,
-    actionLabel: 'View Contract',
-    metadata: { depositPaid: 450, rateMonthly: 450, termMonths: 6 }
-  },
-  {
-    id: 'feed-007',
-    timestamp: '5 hours ago',
-    category: 'AI_ALERT',
-    title: 'Yard Capacity Utilization Below Target',
-    description: 'Houston Freight Logistics Yard fell below 50% occupancy threshold (currently 44%). AI suggests pricing discount.',
-    facilityId: 'fac-003',
-    facilityName: 'Houston Freight Logistics Yard',
-    actorName: 'CY AI Engine',
-    actorRole: 'Revenue Optimization AI',
-    severity: 'warning',
-    actionable: true,
-    actionLabel: 'Review AI Strategy',
-    metadata: { currentRatePercent: 44, targetPercent: 75 }
+    actionLabel: 'View Lease PDF',
+    metadata: { monthlyRent: 750, deposit: 750, term: '12 Months' }
   }
 ];
-

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, Camera, MapPin, CheckCircle2, Clock, DollarSign, Upload, ShieldCheck } from 'lucide-react';
+import { X, Camera, MapPin, Clock, DollarSign } from 'lucide-react';
 import { Task } from '@/lib/types';
 
 interface MobileReportModalProps {
@@ -21,7 +21,6 @@ export const MobileReportModal: React.FC<MobileReportModalProps> = ({
   const [photos, setPhotos] = useState<string[]>([
     'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500'
   ]);
-  const [gpsLogged, setGpsLogged] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!task) return null;
@@ -42,62 +41,62 @@ export const MobileReportModal: React.FC<MobileReportModalProps> = ({
       });
       setIsSubmitting(false);
       onClose();
-    }, 600);
+    }, 500);
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95">
+    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-3">
+      <div className="bg-white border border-slate-200 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-in zoom-in-95">
         {/* Header */}
-        <div className="p-5 border-b border-slate-800 bg-slate-950/60 flex items-center justify-between">
+        <div className="p-4 border-b border-slate-100 bg-slate-50 flex items-center justify-between">
           <div>
-            <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest block">Mobile Tech Inspection</span>
-            <h3 className="font-bold text-base text-white">{task.title}</h3>
-            <p className="text-xs text-slate-400 font-mono mt-0.5">{task.taskNumber} • {task.containerNumber || 'Yard General'}</p>
+            <span className="text-[9px] font-bold text-blue-600 uppercase tracking-widest block">Mobile Tech Inspection</span>
+            <h3 className="font-bold text-sm text-slate-900">{task.title}</h3>
+            <p className="text-[11px] text-slate-500 font-mono mt-0.5">{task.taskNumber} • {task.containerNumber || 'Yard General'}</p>
           </div>
-          <button onClick={onClose} className="p-2 rounded-xl hover:bg-slate-800 text-slate-400">
-            <X className="w-5 h-5" />
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-200/60 text-slate-400 hover:text-slate-700 transition-all">
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
+        <form onSubmit={handleSubmit} className="p-4 space-y-3.5 max-h-[75vh] overflow-y-auto">
           {/* Notes */}
           <div>
-            <label className="text-xs font-bold text-slate-300 block mb-1">Field Inspection Notes</label>
+            <label className="text-xs font-semibold text-slate-700 block mb-1">Field Inspection Notes</label>
             <textarea
               required
-              rows={3}
-              placeholder="Describe work completed, door gasket condition, flooring integrity..."
+              rows={2}
+              placeholder="Describe work completed, door gasket condition..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 text-xs text-white placeholder-slate-500 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 rounded-lg p-2.5 focus:outline-none focus:border-blue-500"
             />
           </div>
 
           {/* Time & Extra Costs */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2.5">
             <div>
-              <label className="text-xs font-bold text-slate-300 block mb-1">Time Spent (Minutes)</label>
-              <div className="flex items-center bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
-                <Clock className="w-4 h-4 text-cyan-400 mr-2" />
+              <label className="text-[11px] font-semibold text-slate-700 block mb-1">Time Spent (Mins)</label>
+              <div className="flex items-center bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-900">
+                <Clock className="w-3.5 h-3.5 text-blue-600 mr-2" />
                 <input
                   type="number"
                   value={completionTime}
                   onChange={(e) => setCompletionTime(e.target.value)}
-                  className="bg-transparent w-full focus:outline-none"
+                  className="bg-transparent w-full focus:outline-none text-xs"
                 />
               </div>
             </div>
             <div>
-              <label className="text-xs font-bold text-slate-300 block mb-1">Extra Materials Cost ($)</label>
-              <div className="flex items-center bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white">
-                <DollarSign className="w-4 h-4 text-emerald-400 mr-2" />
+              <label className="text-[11px] font-semibold text-slate-700 block mb-1">Extra Materials ($)</label>
+              <div className="flex items-center bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs text-slate-900">
+                <DollarSign className="w-3.5 h-3.5 text-emerald-600 mr-2" />
                 <input
                   type="number"
                   value={extraCosts}
                   onChange={(e) => setExtraCosts(e.target.value)}
-                  className="bg-transparent w-full focus:outline-none"
+                  className="bg-transparent w-full focus:outline-none text-xs"
                 />
               </div>
             </div>
@@ -105,40 +104,40 @@ export const MobileReportModal: React.FC<MobileReportModalProps> = ({
 
           {/* Photos Upload Mock */}
           <div>
-            <label className="text-xs font-bold text-slate-300 block mb-1">Inspection Photos (Before / After)</label>
+            <label className="text-[11px] font-semibold text-slate-700 block mb-1">Inspection Photos</label>
             <div className="grid grid-cols-3 gap-2">
               {photos.map((ph, idx) => (
-                <div key={idx} className="relative rounded-xl overflow-hidden border border-slate-800 h-20">
+                <div key={idx} className="relative rounded-lg overflow-hidden border border-slate-200 h-16 shadow-2xs">
                   <img src={ph} alt="Upload" className="w-full h-full object-cover" />
-                  <span className="absolute bottom-1 right-1 text-[9px] bg-black/60 text-white px-1 rounded font-mono">Photo {idx + 1}</span>
+                  <span className="absolute bottom-1 right-1 text-[8px] bg-black/70 text-white px-1 rounded font-mono">Photo {idx + 1}</span>
                 </div>
               ))}
               <button
                 type="button"
-                className="h-20 rounded-xl border-2 border-dashed border-slate-800 hover:border-blue-500 bg-slate-950/40 flex flex-col items-center justify-center text-slate-400 hover:text-blue-400 transition-all text-xs"
+                className="h-16 rounded-lg border border-dashed border-slate-300 hover:border-blue-500 bg-slate-50 flex flex-col items-center justify-center text-slate-500 hover:text-blue-600 transition-all text-xs"
               >
-                <Camera className="w-5 h-5 mb-1" />
-                <span>Snap Photo</span>
+                <Camera className="w-4 h-4 mb-0.5" />
+                <span className="text-[10px]">Add Photo</span>
               </button>
             </div>
           </div>
 
           {/* GPS Verification Badge */}
-          <div className="bg-slate-950/50 p-3 rounded-2xl border border-slate-800 flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2 text-slate-300">
-              <MapPin className="w-4 h-4 text-rose-400" />
-              <span>GPS Location Stamp: <strong>30.2672° N, 97.7431° W</strong></span>
+          <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-200 flex items-center justify-between text-xs">
+            <div className="flex items-center gap-1.5 text-slate-700 text-[11px]">
+              <MapPin className="w-3.5 h-3.5 text-rose-500" />
+              <span>GPS Stamp: <strong>30.2672° N, 97.7431° W</strong></span>
             </div>
-            <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">Verified</span>
+            <span className="text-[9px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-semibold border border-emerald-200">Verified</span>
           </div>
 
           {/* Submit Action */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs py-3 rounded-xl shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 transition-all mt-4"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs py-2.5 rounded-lg shadow-xs shadow-blue-500/20 flex items-center justify-center gap-1.5 transition-all mt-2"
           >
-            {isSubmitting ? 'Uploading Report...' : 'Submit Mobile Field Report'}
+            {isSubmitting ? 'Uploading Report...' : 'Submit Field Report'}
           </button>
         </form>
       </div>

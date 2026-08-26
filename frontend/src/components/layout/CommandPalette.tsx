@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Search, X, Box, Warehouse, User, FileText, ClipboardCheck } from 'lucide-react';
+import { Search, X, Box, Warehouse, User } from 'lucide-react';
 import { Facility, Container, Customer, Task } from '@/lib/types';
 
 interface CommandPaletteProps {
@@ -47,37 +47,37 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   const filteredTasks = tasks.filter(t => t.taskNumber.toLowerCase().includes(q) || t.title.toLowerCase().includes(q));
 
   return (
-    <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-start justify-center pt-20 p-4">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95">
+    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-start justify-center pt-20 p-3">
+      <div className="bg-white border border-slate-200 rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95">
         {/* Search Input Bar */}
-        <div className="p-4 border-b border-slate-800 flex items-center gap-3">
-          <Search className="w-5 h-5 text-blue-400" />
+        <div className="p-3.5 border-b border-slate-100 flex items-center gap-2.5 bg-slate-50/50">
+          <Search className="w-4 h-4 text-blue-600" />
           <input
             type="text"
             autoFocus
-            placeholder="Search facilities, container numbers (ATX-2001), customers, tasks..."
+            placeholder="Search across yards, unit numbers (ATX-2001), customers..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none"
+            className="w-full bg-transparent text-xs text-slate-900 placeholder-slate-400 focus:outline-none"
           />
-          <button onClick={onClose} className="p-1 rounded-lg hover:bg-slate-800 text-slate-400">
-            <X className="w-5 h-5" />
+          <button onClick={onClose} className="p-1 rounded-md hover:bg-slate-200/60 text-slate-400 hover:text-slate-700">
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Results Body */}
-        <div className="max-h-96 overflow-y-auto p-4 space-y-4">
+        <div className="max-h-80 overflow-y-auto p-3 space-y-3">
           {!query && (
-            <p className="text-xs text-slate-500 text-center py-6">
-              Type anything to search across yards, shipping units, CRM clients, and maintenance logs...
+            <p className="text-[11px] text-slate-500 text-center py-6">
+              Type anything to quickly locate facilities, containers, CRM customers, or task dispatches...
             </p>
           )}
 
           {/* Containers */}
           {filteredContainers.length > 0 && (
             <div>
-              <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                <Box className="w-3.5 h-3.5 text-cyan-400" /> Containers ({filteredContainers.length})
+              <h4 className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                <Box className="w-3 h-3 text-blue-600" /> Containers ({filteredContainers.length})
               </h4>
               <div className="space-y-1">
                 {filteredContainers.slice(0, 5).map((c) => (
@@ -87,16 +87,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                       if (onSelectContainer) onSelectContainer(c);
                       onClose();
                     }}
-                    className="w-full text-left p-2.5 rounded-xl hover:bg-slate-800/80 bg-slate-950/40 border border-slate-800/60 flex items-center justify-between transition-all"
+                    className="w-full text-left p-2 rounded-lg hover:bg-slate-50 bg-white border border-slate-200 flex items-center justify-between transition-all shadow-2xs"
                   >
                     <div>
-                      <span className="font-bold text-xs text-white">{c.containerNumber}</span>
-                      <span className="text-[11px] text-slate-400 ml-2">({c.size} - {c.type})</span>
-                      <p className="text-[10px] text-slate-500 mt-0.5">{c.facilityName} • {c.currentCustomerCompany || 'Unassigned'}</p>
+                      <span className="font-bold text-xs text-slate-900 font-mono">{c.containerNumber}</span>
+                      <span className="text-[10px] text-slate-500 ml-2">({c.size} • {c.type})</span>
+                      <p className="text-[10px] text-slate-500 mt-0.5">{c.facilityName} • {c.currentCustomerCompany || 'Available'}</p>
                     </div>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                      c.status === 'Occupied' ? 'bg-rose-500/20 text-rose-300' :
-                      c.status === 'Available' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'
+                    <span className={`text-[9px] font-semibold px-2 py-0.2 rounded-full border ${
+                      c.status === 'Occupied' ? 'bg-rose-50 text-rose-700 border-rose-200' :
+                      c.status === 'Available' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-amber-50 text-amber-700 border-amber-200'
                     }`}>
                       {c.status}
                     </span>
@@ -109,19 +109,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           {/* Facilities */}
           {filteredFacilities.length > 0 && (
             <div>
-              <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                <Warehouse className="w-3.5 h-3.5 text-indigo-400" /> Facilities ({filteredFacilities.length})
+              <h4 className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                <Warehouse className="w-3 h-3 text-indigo-600" /> Facilities ({filteredFacilities.length})
               </h4>
               <div className="space-y-1">
                 {filteredFacilities.map((f) => (
-                  <div key={f.id} className="p-2.5 rounded-xl bg-slate-950/40 border border-slate-800/60 flex items-center justify-between">
+                  <div key={f.id} className="p-2 rounded-lg bg-white border border-slate-200 flex items-center justify-between shadow-2xs">
                     <div>
-                      <span className="font-bold text-xs text-white">{f.name}</span>
-                      <span className="text-[11px] text-indigo-400 ml-2">[{f.code}]</span>
-                      <p className="text-[10px] text-slate-500 mt-0.5">{f.city}, {f.state} • {f.totalContainers} Total Containers</p>
+                      <span className="font-semibold text-xs text-slate-900">{f.name}</span>
+                      <span className="text-[10px] text-blue-600 font-mono ml-2">[{f.code}]</span>
+                      <p className="text-[10px] text-slate-500 mt-0.5">{f.city}, {f.state} • {f.totalContainers} Total Units</p>
                     </div>
-                    <span className="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded-full font-bold">
-                      {f.occupancyRate}% Occupied
+                    <span className="text-[9px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full font-semibold border border-blue-200">
+                      {f.occupancyRate}% Fill
                     </span>
                   </div>
                 ))}
@@ -132,18 +132,18 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           {/* Customers */}
           {filteredCustomers.length > 0 && (
             <div>
-              <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-blue-400" /> Customers ({filteredCustomers.length})
+              <h4 className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                <User className="w-3 h-3 text-blue-600" /> Customers ({filteredCustomers.length})
               </h4>
               <div className="space-y-1">
                 {filteredCustomers.map((cust) => (
-                  <div key={cust.id} className="p-2.5 rounded-xl bg-slate-950/40 border border-slate-800/60 flex items-center justify-between">
+                  <div key={cust.id} className="p-2 rounded-lg bg-white border border-slate-200 flex items-center justify-between shadow-2xs">
                     <div>
-                      <span className="font-bold text-xs text-white">{cust.name}</span>
-                      <span className="text-[11px] text-slate-400 ml-2">({cust.companyName})</span>
-                      <p className="text-[10px] text-slate-500 mt-0.5">{cust.email} • {cust.phone}</p>
+                      <span className="font-semibold text-xs text-slate-900">{cust.name}</span>
+                      <span className="text-[10px] text-slate-500 ml-2">({cust.companyName})</span>
+                      <p className="text-[10px] text-slate-500 mt-0.5">{cust.email}</p>
                     </div>
-                    <span className="text-[10px] text-slate-400 font-mono">
+                    <span className="text-[10px] text-slate-600 font-mono">
                       {cust.activeRentalsCount} Rentals
                     </span>
                   </div>

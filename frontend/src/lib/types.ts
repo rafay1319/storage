@@ -144,8 +144,34 @@ export interface AIInsight {
   recommendedAction: string;
 }
 
-export type FeedCategory = 'GATE_MOVE' | 'RENTAL_PAYMENT' | 'INSPECTION' | 'AI_ALERT' | 'MAINTENANCE';
+export type FeedCategory = 'GATE_MOVE' | 'RENTAL_PAYMENT' | 'INSPECTION' | 'AI_ALERT' | 'MAINTENANCE' | 'GENERAL';
 export type FeedSeverity = 'info' | 'success' | 'warning' | 'danger';
+
+export interface FeedComment {
+  id: string;
+  authorName: string;
+  authorRole: string;
+  authorAvatar?: string;
+  text: string;
+  timestamp: string;
+  likes: number;
+  isLiked?: boolean;
+}
+
+export interface LinkedTaskInfo {
+  taskNumber: string;
+  taskTitle: string;
+  assignedTo: string;
+  priority: 'Low' | 'Medium' | 'High' | 'Emergency';
+  status: 'Pending' | 'In Progress' | 'Completed';
+  reply: {
+    authorName: string;
+    authorRole: string;
+    authorAvatar?: string;
+    text: string;
+    timestamp: string;
+  };
+}
 
 export interface FeedItem {
   id: string;
@@ -153,6 +179,7 @@ export interface FeedItem {
   category: FeedCategory;
   title: string;
   description: string;
+  caption?: string;
   facilityId?: string;
   facilityName?: string;
   containerNumber?: string;
@@ -161,8 +188,13 @@ export interface FeedItem {
   actorRole: string;
   actorAvatar?: string;
   severity: FeedSeverity;
+  image?: string;
+  likesCount: number;
+  isLiked: boolean;
+  comments: FeedComment[];
+  isSaved?: boolean;
+  linkedTask?: LinkedTaskInfo;
   actionable?: boolean;
   actionLabel?: string;
   metadata?: Record<string, string | number | boolean>;
 }
-

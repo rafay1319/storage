@@ -11,7 +11,7 @@ export function SettingsPage() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-slate-950 text-slate-100 font-sans">
+    <div className="flex min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-500/20 selection:text-blue-900">
       <Sidebar currentRole={currentRole} onRoleChange={setCurrentRole} />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -22,50 +22,57 @@ export function SettingsPage() {
           onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         />
 
-        <main className="p-8 space-y-6 overflow-y-auto">
+        <main className="p-6 space-y-5 overflow-y-auto">
           <div>
-            <h1 className="text-2xl font-black text-white flex items-center gap-2">
-              <Settings className="w-6 h-6 text-slate-400" /> Platform Settings & Security
+            <h1 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+              System Settings & Access Controls
             </h1>
-            <p className="text-xs text-slate-400 mt-1">
-              Role-based access control (RBAC), multi-factor authentication (2FA), API keys, and audit logging.
+            <p className="text-xs text-slate-500 mt-0.5">
+              Role-based permissions, multi-factor authentication (2FA), API credentials, and database telemetry.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl space-y-4">
-              <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" /> Security & Access Controls
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-xs space-y-3">
+              <h3 className="font-semibold text-xs text-slate-900 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" /> Security & Access Controls
               </h3>
-              <div className="space-y-3 text-xs">
-                <div className="flex items-center justify-between p-3 bg-slate-950/60 rounded-2xl border border-slate-800">
+              <div className="space-y-2 text-xs">
+                <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-lg border border-slate-100">
                   <div>
-                    <span className="font-bold text-white block">Two-Factor Authentication (2FA)</span>
-                    <span className="text-[11px] text-slate-400">Enforce 2FA for all yard managers</span>
+                    <span className="font-medium text-slate-800 block">Two-Factor Authentication (2FA)</span>
+                    <span className="text-[10px] text-slate-500">Enforce hardware/TOTP 2FA for staff</span>
                   </div>
-                  <span className="text-emerald-400 font-bold">Enabled</span>
+                  <span className="text-emerald-700 font-semibold text-xs bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Enabled</span>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-slate-950/60 rounded-2xl border border-slate-800">
+                <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-lg border border-slate-100">
                   <div>
-                    <span className="font-bold text-white block">API Rate Limiting</span>
-                    <span className="text-[11px] text-slate-400">300 requests / 15 minutes</span>
+                    <span className="font-medium text-slate-800 block">API Rate Limiting</span>
+                    <span className="text-[10px] text-slate-500">300 requests / 15 minutes</span>
                   </div>
-                  <span className="text-cyan-400 font-bold">Active</span>
+                  <span className="text-blue-700 font-semibold text-xs bg-blue-50 px-2 py-0.5 rounded border border-blue-200">Active</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl space-y-4">
-              <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                <Database className="w-4 h-4 text-cyan-400" /> Database & Cloud Backup
+            <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-xs space-y-3">
+              <h3 className="font-semibold text-xs text-slate-900 flex items-center gap-2">
+                <Database className="w-4 h-4 text-blue-600" /> Database & Cloud Backup
               </h3>
-              <div className="space-y-3 text-xs">
-                <div className="flex items-center justify-between p-3 bg-slate-950/60 rounded-2xl border border-slate-800">
+              <div className="space-y-2 text-xs">
+                <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-lg border border-slate-100">
                   <div>
-                    <span className="font-bold text-white block">PostgreSQL Replica Sync</span>
-                    <span className="text-[11px] text-slate-400">Automated hourly snapshot</span>
+                    <span className="font-medium text-slate-800 block">PostgreSQL Replica Sync</span>
+                    <span className="text-[10px] text-slate-500">Automated hourly snapshot replication</span>
                   </div>
-                  <span className="text-emerald-400 font-bold">Healthy</span>
+                  <span className="text-emerald-700 font-semibold text-xs bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Healthy</span>
+                </div>
+                <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                  <div>
+                    <span className="font-medium text-slate-800 block">Telemetry Webhooks</span>
+                    <span className="text-[10px] text-slate-500">Dispatching to 4 external listeners</span>
+                  </div>
+                  <span className="text-indigo-700 font-semibold text-xs bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">Connected</span>
                 </div>
               </div>
             </div>

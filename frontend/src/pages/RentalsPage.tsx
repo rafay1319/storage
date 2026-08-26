@@ -17,7 +17,7 @@ export function RentalsPage() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-slate-950 text-slate-100 font-sans">
+    <div className="flex min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-500/20 selection:text-blue-900">
       <Sidebar currentRole={currentRole} onRoleChange={setCurrentRole} />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -28,63 +28,63 @@ export function RentalsPage() {
           onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         />
 
-        <main className="p-8 space-y-6 overflow-y-auto">
-          <div className="flex flex-wrap items-center justify-between gap-4">
+        <main className="p-6 space-y-5 overflow-y-auto">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h1 className="text-2xl font-black text-white flex items-center gap-2">
-                <FileText className="w-6 h-6 text-cyan-400" /> Rental & Lease Management
+              <h1 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                Leases & Rental Agreements
               </h1>
-              <p className="text-xs text-slate-400 mt-1">
-                Lease contracts, recurring monthly billing, digital signature archives, and auto-renewals.
+              <p className="text-xs text-slate-500 mt-0.5">
+                Active tenant agreements, monthly recurring billing terms, and renewal cycles.
               </p>
             </div>
 
-            <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-lg shadow-blue-600/20 transition-all">
-              <Plus className="w-4 h-4" />
-              <span>Create Rental Agreement</span>
+            <button className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-xs shadow-blue-500/20 transition-all">
+              <Plus className="w-3.5 h-3.5" />
+              <span>Create Agreement</span>
             </button>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+          <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr className="bg-slate-950 text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-800">
-                    <th className="p-4">Agreement #</th>
-                    <th className="p-4">Tenant</th>
-                    <th className="p-4">Container Unit</th>
-                    <th className="p-4">Yard</th>
-                    <th className="p-4">Billing Cycle</th>
-                    <th className="p-4">Monthly Rent</th>
-                    <th className="p-4">Status</th>
+                  <tr className="bg-slate-50 text-slate-500 uppercase tracking-wider text-[10px] border-b border-slate-200">
+                    <th className="py-3 px-4 font-semibold">Agreement #</th>
+                    <th className="py-3 px-4 font-semibold">Tenant Account</th>
+                    <th className="py-3 px-4 font-semibold">Unit Assigned</th>
+                    <th className="py-3 px-4 font-semibold">Yard Facility</th>
+                    <th className="py-3 px-4 font-semibold">Billing Term</th>
+                    <th className="py-3 px-4 font-semibold">Monthly Rate</th>
+                    <th className="py-3 px-4 text-right font-semibold">Lease Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/60 text-slate-300">
+                <tbody className="divide-y divide-slate-100 text-slate-700">
                   {mockRentals.map((r) => (
-                    <tr key={r.id} className="hover:bg-slate-800/40 transition-colors">
-                      <td className="p-4 font-mono font-extrabold text-cyan-400">
+                    <tr key={r.id} className="hover:bg-slate-50/60 transition-colors">
+                      <td className="py-3 px-4 font-mono font-bold text-blue-700 text-xs">
                         {r.rentalNumber}
                       </td>
-                      <td className="p-4 font-bold text-white">
+                      <td className="py-3 px-4 font-semibold text-slate-900">
                         {r.customerName}
                       </td>
-                      <td className="p-4 font-mono text-slate-200">
+                      <td className="py-3 px-4 font-mono text-slate-800">
                         {r.containerNumber}
                       </td>
-                      <td className="p-4 text-slate-400">
+                      <td className="py-3 px-4 text-slate-600">
                         {r.facilityName}
                       </td>
-                      <td className="p-4">
-                        <span className="bg-slate-800 px-2.5 py-1 rounded-full text-[10px] font-semibold text-slate-300">
+                      <td className="py-3 px-4">
+                        <span className="bg-slate-100 px-2 py-0.5 rounded text-[10px] font-medium text-slate-700 border border-slate-200">
                           {r.billingCycle}
                         </span>
                       </td>
-                      <td className="p-4 font-mono font-bold text-emerald-400">
+                      <td className="py-3 px-4 font-mono font-semibold text-emerald-700">
                         ${r.rentRate}/mo
                       </td>
-                      <td className="p-4">
-                        <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 w-fit">
-                          <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                      <td className="py-3 px-4 text-right">
+                        <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+                          <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
                           {r.status}
                         </span>
                       </td>
