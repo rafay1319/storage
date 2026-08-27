@@ -16,8 +16,10 @@ const forecastData = [
   { month: 'Jan 2027', predictedRevenue: 64500, predictedOccupancy: 96 }
 ];
 
+import { useRole } from '@/lib/RoleContext';
+
 export function AiInsightsPage() {
-  const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
+  const { role: currentRole, setRole: setCurrentRole } = useRole();
   const [selectedFacilityId, setSelectedFacilityId] = useState('ALL');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 

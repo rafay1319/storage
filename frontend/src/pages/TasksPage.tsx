@@ -6,9 +6,10 @@ import { MobileReportModal } from '@/components/tasks/MobileReportModal';
 import { INITIAL_FACILITIES, INITIAL_CONTAINERS, INITIAL_CUSTOMERS, INITIAL_TASKS } from '@/lib/mockData';
 import { Task } from '@/lib/types';
 import { ClipboardCheck, Plus, Smartphone } from 'lucide-react';
+import { useRole } from '@/lib/RoleContext';
 
 export function TasksPage() {
-  const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
+  const { role: currentRole, setRole: setCurrentRole } = useRole();
   const [selectedFacilityId, setSelectedFacilityId] = useState('ALL');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
@@ -56,10 +57,9 @@ export function TasksPage() {
                 <div key={colStatus} className="bg-white border border-slate-200 rounded-xl p-4 shadow-xs space-y-3">
                   <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
                     <h3 className="font-semibold text-xs text-slate-700 flex items-center gap-2">
-                      <span className={`w-2 h-2 rounded-full ${
-                        colStatus === 'Completed' ? 'bg-emerald-500' :
-                        colStatus === 'In Progress' ? 'bg-blue-500' : 'bg-amber-500'
-                      }`}></span>
+                      <span className={`w-2 h-2 rounded-full ${colStatus === 'Completed' ? 'bg-emerald-500' :
+                          colStatus === 'In Progress' ? 'bg-blue-500' : 'bg-amber-500'
+                        }`}></span>
                       {colStatus}
                     </h3>
                     <span className="text-[10px] font-mono font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
@@ -72,9 +72,8 @@ export function TasksPage() {
                       <div key={t.id} className="bg-slate-50 p-3 rounded-lg border border-slate-200/80 space-y-2 hover:border-slate-300 transition-all shadow-2xs">
                         <div className="flex items-center justify-between">
                           <span className="font-mono text-[10px] text-blue-700 font-semibold">{t.taskNumber}</span>
-                          <span className={`text-[9px] font-semibold px-2 py-0.5 rounded border ${
-                            t.priority === 'High' ? 'bg-rose-50 text-rose-700 border-rose-200' : 'bg-blue-50 text-blue-700 border-blue-200'
-                          }`}>
+                          <span className={`text-[9px] font-semibold px-2 py-0.5 rounded border ${t.priority === 'High' ? 'bg-rose-50 text-rose-700 border-rose-200' : 'bg-blue-50 text-blue-700 border-blue-200'
+                            }`}>
                             {t.priority}
                           </span>
                         </div>

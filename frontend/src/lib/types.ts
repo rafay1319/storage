@@ -163,7 +163,7 @@ export interface LinkedTaskInfo {
   taskTitle: string;
   assignedTo: string;
   priority: 'Low' | 'Medium' | 'High' | 'Emergency';
-  status: 'Pending' | 'In Progress' | 'Completed';
+  status: 'Pending' | 'In Progress' | 'Review' | 'Completed';
   reply: {
     authorName: string;
     authorRole: string;
@@ -189,6 +189,9 @@ export interface FeedItem {
   actorAvatar?: string;
   severity: FeedSeverity;
   image?: string;
+  photos?: { url: string; label?: string }[];
+  beforePhoto?: string;
+  afterPhoto?: string;
   likesCount: number;
   isLiked: boolean;
   comments: FeedComment[];
@@ -197,4 +200,10 @@ export interface FeedItem {
   actionable?: boolean;
   actionLabel?: string;
   metadata?: Record<string, string | number | boolean>;
+  approvalStatus?: 'APPROVED' | 'PENDING_REVIEW' | 'CHANGES_REQUESTED';
+  approvedBy?: string;
+  checklistResults?: { label: string; done: boolean }[];
+  timeSpentMins?: number;
+  costMaterials?: string;
+  gpsLocation?: string;
 }

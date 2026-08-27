@@ -6,9 +6,10 @@ import { ContainerDetailModal } from '@/components/map/ContainerDetailModal';
 import { INITIAL_FACILITIES, INITIAL_CONTAINERS, INITIAL_CUSTOMERS, INITIAL_TASKS } from '@/lib/mockData';
 import { Container } from '@/lib/types';
 import { Box, Plus, Search, QrCode } from 'lucide-react';
+import { useRole } from '@/lib/RoleContext';
 
 export function ContainersPage() {
-  const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
+  const { role: currentRole, setRole: setCurrentRole } = useRole();
   const [selectedFacilityId, setSelectedFacilityId] = useState('ALL');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [selectedContainer, setSelectedContainer] = useState<Container | null>(null);

@@ -4,9 +4,10 @@ import { Header } from '@/components/layout/Header';
 import { CommandPalette } from '@/components/layout/CommandPalette';
 import { INITIAL_FACILITIES, INITIAL_CONTAINERS, INITIAL_CUSTOMERS, INITIAL_TASKS } from '@/lib/mockData';
 import { FileText, Plus, CheckCircle2 } from 'lucide-react';
+import { useRole } from '@/lib/RoleContext';
 
 export function RentalsPage() {
-  const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
+  const { role: currentRole, setRole: setCurrentRole } = useRole();
   const [selectedFacilityId, setSelectedFacilityId] = useState('ALL');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 

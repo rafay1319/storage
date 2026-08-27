@@ -6,9 +6,10 @@ import { YardMapCanvas } from '@/components/map/YardMapCanvas';
 import { ContainerDetailModal } from '@/components/map/ContainerDetailModal';
 import { INITIAL_FACILITIES, INITIAL_CONTAINERS, INITIAL_CUSTOMERS, INITIAL_TASKS } from '@/lib/mockData';
 import { Container } from '@/lib/types';
+import { useRole } from '@/lib/RoleContext';
 
 export function MapPage() {
-  const [currentRole, setCurrentRole] = useState('OWNER_ADMIN');
+  const { role: currentRole, setRole: setCurrentRole } = useRole();
   const [selectedFacilityId, setSelectedFacilityId] = useState('fac-001');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [selectedContainer, setSelectedContainer] = useState<Container | null>(null);
